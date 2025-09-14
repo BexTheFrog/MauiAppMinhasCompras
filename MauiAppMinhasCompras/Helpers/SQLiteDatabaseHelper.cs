@@ -1,52 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//Iniciando codificação da classe para o armazenamento e definindo metódos;
+
+//Chamando os modelos gravados no aplicativo;
 using MauiAppMinhasCompras.Models;
+//Chamando a dependencia instalada para utilizar o SQLite;
 using SQLite;
 
+//Iniciando conjunto das classes
 namespace MauiAppMinhasCompras.Helpers
 {
+    // Iniciando classe de conexão;
     public class SQLiteDatabaseHelper
     {
-        readonly SQLiteAsyncConnection _conn;
+        // Chamando readoly para garantir a declaração de classe apenas com seu construtor;
+        readonly SQLiteAsyncConnection _conexao;
 
+        // Construtor da conexão e a tabela que representará a classe;
         public SQLiteDatabaseHelper(string path)
         {
-            _conn = new SQLiteAsyncConnection(path);
-            _conn.CreateTableAsync<Produto>().Wait();
+            // Estabelece conexão com o SQLite;
+            _conexao = new SQLiteAsyncConnection(path);
+            // Aguarda a criação da tabela Produto, se existir 
+            _conexao.CreateTableAsync<Produto>().Wait();
         }
 
-        public Task<int> Insert(Produto p)
+        //Começando a Iniciar os metódos do CRUD
+
+        // Metodo do Insert - Vai adicionar um produto, parametro do metodo para criação é ter um produto, ou seja um item;
+        public Task<int> Insert(Produto item) 
         {
-            return _conn.InsertAsync(p);
+            // Inserindo o produto com o metodo já asincrono para a espera da tarefa;
+            return _conexao.InsertAsync(item);
         }
 
-        public Task<List<Produto>> Update(Produto p)
+        // Método de atualização do produto - onde o parametro para que atualize é um item (se vou atualizar tem que ter com o que vou atualizar)
+        public Task<List<Produto>> Update(Produto item)
         {
+            // Definindo a Query. 
             string sql = "UPDATE Produto SET Descricao=?, Quantidade=?, Preco=? WHERE Id=?";
 
-            return _conn.QueryAsync<Produto>(
-                sql, p.Descricao, p.Quantidade, p.Preco, p.Id
+            // Utilizando um metódo com a QueryAsync
+            return _conexao.QueryAsync<Produto>(
+                sql, item.Descricao, item.Quantidade, item.Preco, item.Id
             );
         }
 
+        // Método para deletar produtos - onde o parametro é o id deste produto, para identificar qual vai ser deletado
         public Task<int> Delete(int id)
         {
-            return _conn.Table<Produto>().DeleteAsync(i => i.Id == id);
+            // Realiza o delete, com método próprio;
+            return _conexao.Table<Produto>().DeleteAsync(i => i.Id == id);
         }
 
+        // Metodo para listar os produtos;
         public Task<List<Produto>> GetAll()
         {
-            return _conn.Table<Produto>().ToListAsync();
+            // Vai retornar uma lista (com metodo próprio) assincrona dos produtos;
+            return _conexao.Table<Produto>().ToListAsync();
         }
 
-        public Task<List<Produto>> Search(string q)
+        // Método para buscar os produtos - Tendo como parametro uma key (chave) para buscar no banco;
+        public Task<List<Produto>> Search(string key)
         {
-            string sql = "SELECT * Produto WHERE descricao LIKE '%" + q + "%'";
+            //Denominando uma variavel para guardar a query a ser usada no query async;
+            string sql = "SELECT * FROM Produto WHERE descricao LIKE '%" + key + "%'";
 
-            return _conn.QueryAsync<Produto>(sql);
+            //Retorna os resultados desta query;
+            return _conexao.QueryAsync<Produto>(sql);
         }
+
+        // O task é uma tafera, uma tarefa de lista, que lista produtos;
     }
 }
