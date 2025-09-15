@@ -17,10 +17,20 @@ public partial class ListaProduto : ContentPage
 
     protected async override void OnAppearing()
     {
-        List<Produto> tmp = await App.Db.GetAll();
+        if (lista.Count > 0) { 
+        try
+        {
+            List<Produto> tmp = await App.Db.GetAll();
+            lista.Clear();
+            tmp.ForEach(i => lista.Add(i));
+        } catch (Exception erro){
+            await DisplayAlert("Ops, erro ao carregar ", erro.Message, "Fechar");
+        }
+        } else
+        {
 
-        lista.Clear();
-        tmp.ForEach(i => lista.Add(i));
+        }
+        
     }
 
     private void Adicionar_Produto(object sender, EventArgs e)
@@ -38,13 +48,20 @@ public partial class ListaProduto : ContentPage
 
     private async void txt_search_TextChanged(object sender, TextChangedEventArgs e)
     {
+        try
+        {
         string q = e.NewTextValue;
 
-        lista.Clear();
+                lista.Clear();
 
-        List<Produto> tmp = await App.Db.Search(q);
+                List<Produto> tmp = await App.Db.Search(q);
 
-        tmp.ForEach(i => lista.Add(i));
+                tmp.ForEach(i => lista.Add(i));
+        } catch (Exception erro)
+        {
+            await DisplayAlert("Ops, erro ao Buscar ", erro.Message, "Fechar");
+        }
+        
     }
 
     private void Somar_Clicked(object sender, EventArgs e)
@@ -85,5 +102,24 @@ public partial class ListaProduto : ContentPage
                 await DisplayAlert("Erro ao remover", ex.Message, "Fechar");
             }
         }
-    
+
+    private void Editar_Produto(object sender, SelectedItemChangedEventArgs e)
+    {
+        try
+        {
+            Produto item = e.SelectedItem as Produto;
+
+            if (item != null)
+            {
+                Navigation.PushAsync(new Views.EditarProduto { BindingContext = item });
+            } else
+            {
+                DisplayAlert("Ops", "Nada foi selecionado", "Fechar");
+            }
+
+        } catch (Exception ex)
+        {
+            DisplayAlert("Erro ao remover", ex.Message, "Fechar");
+        }
+    }
 }

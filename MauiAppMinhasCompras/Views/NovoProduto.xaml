@@ -46,8 +46,6 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <Button Text="Adicionar Produto" BackgroundColor="#FF5E33" TextColor="White" FontFamily="Cerebri" CornerRadius="10" HeightRequest="50"/>
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

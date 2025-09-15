@@ -13,7 +13,7 @@
         <SearchBar x:Name="txt_search" 
                    Placeholder="Buscar..."
                    TextChanged="txt_search_TextChanged"/>
-        <ListView x:Name="lst_produtos" Margin="5">
+        <ListView x:Name="lst_produtos" Margin="5" ItemSelected="Editar_Produto">
             <ListView.Header>
                 <Grid ColumnDefinitions="*, *, *, *, *">
                     <Label Grid.Column="0" Text="ID" />
