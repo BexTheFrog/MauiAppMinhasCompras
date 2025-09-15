@@ -3,16 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppMinhasCompras.Views.ListaProduto"
              Title="ListaProduto">
-             Title="Minhas Compras">
+             
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Somar"/>
         <ToolbarItem Text="Adicionar" Clicked="Adicionar_Produto"/>
     </ContentPage.ToolbarItems> 
    
-    <VerticalStackLayout>
-
+    <VerticalStackLayout Padding="15">
+        
+        
         <SearchBar x:Name="txt_search" Placeholder="Buscar Item..." PlaceholderColor="LightGray"/>
-        <ListView></ListView>
+        
+        <ListView x:Name="lst_produtos">
+            <ListView.Header>
+                <Grid ColumnDefinitions="*, *, *, *, *, *">
+                    <Label Grid.Column="0" Text="{Binding Id}" />
+                    <Label Grid.Column="1" Text="{Binding Descricao}" />
+                    <Label Grid.Column="2" Text="{Binding Quantidade}" />
+                    <Label Grid.Column="3" Text="{Binding Preco}" />
+                    <Label Grid.Column="4" Text="{Binding Total}" />
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Remover"/>
+                        </ViewCell.ContextActions>
+                        
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </VerticalStackLayout>
 </ContentPage>
