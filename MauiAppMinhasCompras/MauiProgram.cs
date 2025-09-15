@@ -13,6 +13,7 @@ namespace MauiAppMinhasCompras
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("CerebriSansPro-Bold.ttf", "Cerebri");
                 });
 
 #if DEBUG

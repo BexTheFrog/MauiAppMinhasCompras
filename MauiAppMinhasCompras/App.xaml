@@ -9,6 +9,12 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Color x:Key="PrimaryColor">#FF5E33</Color>
+            <Color x:Key="OnPrimaryColor">#EFE7D3</Color>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="BarTextColor" Value="{StaticResource OnPrimaryColor}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
