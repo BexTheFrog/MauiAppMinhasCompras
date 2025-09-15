@@ -49,11 +49,17 @@ public partial class ListaProduto : ContentPage
 
     private void Somar_Clicked(object sender, EventArgs e)
     {
+        if (lista.Count == 0)
+        {
+            DisplayAlert("Nada por aqui", "Nenhum produto á ser somado", "Ok");
+        } else { 
+
         double soma = lista.Sum(i => i.Total);
 
         string msg = $"O total é {soma:C}";
 
         DisplayAlert("Total dos produtos", msg,"Ok");
+        }
     }
 
     private async void Remover_Produto(object sender, EventArgs e)
