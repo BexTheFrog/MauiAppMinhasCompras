@@ -9,3 +9,9 @@ Agenda 01  - Criação do repositório, estruturação de arquivos, criando o mo
 Agenda 02 - Adicionando o código comentado da estruturação do SQLiteDabaseHelper.cs;
 
 Agenda 03 -  Utilizando o metodo para criar produto no SQLite, Inicio de estruturação das Views e adição de estilo na pagina adicionar produto;
+
+Agenda 04 - Adicionando o SearchBar;
+
+Agenda 05 - Finalização do CRUD;
+
+Agenda 06 - Finalização do App + Alteração da Model para categoria;
