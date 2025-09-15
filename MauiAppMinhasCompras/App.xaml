@@ -9,11 +9,15 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Color x:Key="PrimaryColor">#FF5E33</Color>
-            <Color x:Key="OnPrimaryColor">#EFE7D3</Color>
+            <Color x:Key="PrimaryColor">#69A481</Color>
+            <Color x:Key="OnPrimaryColor">#E7EDEB</Color>
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="BarTextColor" Value="{StaticResource OnPrimaryColor}" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Cerebri"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

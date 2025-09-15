@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiAppMinhasCompras.Views.ListaProduto"
-             Title="Minhas Compras">
+             x:Class="MauiAppMinhasCompras.Views.ListaProduto">
+
+    <NavigationPage.TitleView>
+        <Label  Text="Minhas Compras"
+                FontFamily="Cerebri"
+                FontSize="20"
+                TextColor="#E7EDEB"
+                Padding="10"
+                VerticalTextAlignment="Center"/>
+    </NavigationPage.TitleView>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Somar" Clicked="Somar_Clicked" />
@@ -14,13 +22,13 @@
                    Placeholder="Buscar..."
                    TextChanged="txt_search_TextChanged"/>
         <ListView x:Name="lst_produtos" Margin="5" ItemSelected="Editar_Produto">
-            <ListView.Header>
-                <Grid ColumnDefinitions="*, *, *, *, *">
-                    <Label Grid.Column="0" Text="ID" />
-                    <Label Grid.Column="1" Text="Descrição" />
-                    <Label Grid.Column="2" Text="Preço" />
-                    <Label Grid.Column="3" Text="Qnt" />
-                    <Label Grid.Column="4" Text="Total" />
+            <ListView.Header >
+                <Grid ColumnDefinitions="*, *, *, *, *" ColumnSpacing="15" BackgroundColor="#69A481">
+                    <Label Grid.Column="0" Text="ID"   TextColor="#E7EDEB" />
+                    <Label Grid.Column="1" Text="Nome"  TextColor="#E7EDEB" />
+                    <Label Grid.Column="2" Text="Preço"   TextColor="#E7EDEB" />
+                    <Label Grid.Column="3" Text="Quantidade"   TextColor="#E7EDEB" />
+                    <Label Grid.Column="4" Text="Total"   TextColor="#E7EDEB" />
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>
@@ -29,12 +37,12 @@
                         <ViewCell.ContextActions>
                             <MenuItem Text="Remover" Clicked="Remover_Produto"/>
                         </ViewCell.ContextActions>
-                        <Grid ColumnDefinitions="*, *, *, *, *">
-                            <Label Grid.Column="0" Text="{Binding Id}" />
-                            <Label Grid.Column="1" Text="{Binding Descricao}" />
-                            <Label Grid.Column="2" Text="{Binding Preco,StringFormat='R$ {0:F2}'}" />
-                            <Label Grid.Column="3" Text="{Binding Quantidade}" />
-                            <Label Grid.Column="4" Text="{Binding Total, StringFormat='R$ {0:F2}'}" />
+                        <Grid ColumnDefinitions="*, *, *, *, *" ColumnSpacing="10" Padding="8">
+                            <Label Grid.Column="0" Text="{Binding Id}" HorizontalTextAlignment="Start" />
+                            <Label Grid.Column="1" Text="{Binding Descricao}" HorizontalTextAlignment="Start"/>
+                            <Label Grid.Column="2" Text="{Binding Preco,StringFormat='R$ {0:F2}'}" HorizontalTextAlignment="Start"/>
+                            <Label Grid.Column="3" Text="{Binding Quantidade}" HorizontalTextAlignment="Start"/>
+                            <Label Grid.Column="4" Text="{Binding Total, StringFormat='R$ {0:F2}'}" HorizontalTextAlignment="Start"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

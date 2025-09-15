@@ -17,19 +17,18 @@ public partial class ListaProduto : ContentPage
 
     protected async override void OnAppearing()
     {
-        if (lista.Count > 0) { 
+        
         try
         {
-            List<Produto> tmp = await App.Db.GetAll();
             lista.Clear();
+
+            List<Produto> tmp = await App.Db.GetAll();
+       
             tmp.ForEach(i => lista.Add(i));
         } catch (Exception erro){
             await DisplayAlert("Ops, erro ao carregar ", erro.Message, "Fechar");
         }
-        } else
-        {
-
-        }
+        
         
     }
 
