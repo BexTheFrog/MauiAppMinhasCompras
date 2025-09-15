@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using MauiAppMinhasCompras.Models;
 
 namespace MauiAppMinhasCompras.Views;
@@ -53,4 +55,29 @@ public partial class ListaProduto : ContentPage
 
         DisplayAlert("Total dos produtos", msg,"Ok");
     }
+
+    private async void Remover_Produto(object sender, EventArgs e)
+   
+        {
+            try
+            {
+                MenuItem? selecinado = sender as MenuItem;
+
+                Produto? p = selecinado?.BindingContext as Produto;
+
+                bool confirm = await DisplayAlert(
+                    "Tem Certeza?", $"Remover {p.Descricao}?", "Sim", "Não");
+
+                if (confirm)
+                {
+                    await App.Db.Delete(p.Id);
+                    lista.Remove(p);
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Erro ao remover", ex.Message, "Fechar");
+            }
+        }
+    
 }
