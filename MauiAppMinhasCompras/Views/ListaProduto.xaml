@@ -3,16 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppMinhasCompras.Views.ListaProduto"
              Title="Minhas Compras">
-  
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Somar"/>
-        <ToolbarItem Text="Adicionar" Clicked="Adicionar_Produto"/>
-    </ContentPage.ToolbarItems> 
-   
-    <VerticalStackLayout>
+        <ToolbarItem Text="Somar" Clicked="Somar_Clicked" />
+        <ToolbarItem Text="Adicionar" Clicked="Adicionar_Produto" />
+    </ContentPage.ToolbarItems>
 
-        <SearchBar x:Name="txt_search" Placeholder="Buscar Item..." PlaceholderColor="LightGray"/>
-        <ListView></ListView>
-
+    <VerticalStackLayout Padding="10">
+        <SearchBar x:Name="txt_search" 
+                   Placeholder="Buscar..."
+                   TextChanged="txt_search_TextChanged"/>
+        <ListView x:Name="lst_produtos" Margin="5">
+            <ListView.Header>
+                <Grid ColumnDefinitions="*, *, *, *, *">
+                    <Label Grid.Column="0" Text="ID" />
+                    <Label Grid.Column="1" Text="Descrição" />
+                    <Label Grid.Column="2" Text="Preço" />
+                    <Label Grid.Column="3" Text="Qnt" />
+                    <Label Grid.Column="4" Text="Total" />
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Remover" />
+                        </ViewCell.ContextActions>
+                        <Grid ColumnDefinitions="*, *, *, *, *">
+                            <Label Grid.Column="0" Text="{Binding Id}" />
+                            <Label Grid.Column="1" Text="{Binding Descricao}" />
+                            <Label Grid.Column="2" Text="{Binding Preco,StringFormat='R$ {0:F2}'}" />
+                            <Label Grid.Column="3" Text="{Binding Quantidade}" />
+                            <Label Grid.Column="4" Text="{Binding Total, StringFormat='R$ {0:F2}'}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
 </ContentPage>

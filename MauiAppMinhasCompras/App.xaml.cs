@@ -6,10 +6,12 @@ namespace MauiAppMinhasCompras
     {
         static SQLiteDatabaseHelper _db;
 
-        public static SQLiteDatabaseHelper Db { 
-            
-            get { 
-            
+        public static SQLiteDatabaseHelper Db
+        {
+
+            get
+            {
+
                 if (_db == null)
                 {
                     string path = Path.Combine(
@@ -21,13 +23,13 @@ namespace MauiAppMinhasCompras
 
                 return _db;
             }
-        
+
         }
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage( new Views.ListaProduto());
+            MainPage = new NavigationPage(new Views.ListaProduto());
         }
     }
 }
